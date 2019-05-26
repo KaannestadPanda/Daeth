@@ -3,12 +3,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-public class Gamme extends JPanel implements ActionListener, KeyListener{
+public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMotionListener,  MouseListener{
 
 	Player player=new Player(500,500,10,10);
 	final int MENU_STATE = 0;
@@ -16,6 +19,7 @@ public class Gamme extends JPanel implements ActionListener, KeyListener{
 	final int END_STATE = 2;
 	int currentState = GAME_STATE;
 	ObbjectManager manager=new ObbjectManager(player);
+	
 	
 	Timer timer;
 	
@@ -26,6 +30,7 @@ public class Gamme extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	void startGame() {
+		manager.addEnemy(new Enemy(20,20,10,10));
 		timer.start();
 	}
 	
@@ -81,21 +86,11 @@ void drawMenuState(Graphics g) {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		SwingUtilities.invokeLater(new Thread(()-> {
-			if(e.getKeyCode()==KeyEvent.VK_A) {
-				player.leftPressed=true;
-			}
+		
 			 if(e.getKeyCode()==KeyEvent.VK_D) {
 				player.rightPressed=true;
 			}
-			 if(e.getKeyCode()==KeyEvent.VK_W) {
-					player.upPressed=true;
-				}
-			if(e.getKeyCode()==KeyEvent.VK_S) {
-					player.downPressed=true;
-				}
-		}));
-		
+			 		
 		
 	}
 
@@ -103,20 +98,11 @@ void drawMenuState(Graphics g) {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		SwingUtilities.invokeLater(new Thread(()-> {
-		if(e.getKeyCode()==KeyEvent.VK_A) {
-			player.leftPressed=false;
-		}
+		
 		 if(e.getKeyCode()==KeyEvent.VK_D) {
 			player.rightPressed=false;
 		}
-		 if(e.getKeyCode()==KeyEvent.VK_W) {
-				player.upPressed=false;
-			}
-			 if(e.getKeyCode()==KeyEvent.VK_S) {
-				player.downPressed=false;
-			}
-		}));
+		
 		
 	}
 	
@@ -132,6 +118,51 @@ void drawMenuState(Graphics g) {
 		}
 		
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		player.x=e.getX()-6;
+		player.y=e.getY()-30;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		player.x=e.getX()-6;
+		player.y=e.getY()-30;
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		player.x=e.getX()-6;
+		player.y=e.getY()-30;
 	}
 
 	

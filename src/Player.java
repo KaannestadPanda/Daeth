@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Player extends GammeObject{
 
@@ -15,15 +17,8 @@ public class Player extends GammeObject{
 	if(rightPressed==true) {
 		x+=speed;
 		}
-	if(leftPressed==true) {
-		x-=speed;
-		}
-	if(upPressed==true) {
-		y-=speed;
-		}
-	if(downPressed==true) {
-		y+=speed;
-		}
+	
+	
 	
 	
 	
@@ -35,6 +30,7 @@ public class Player extends GammeObject{
 		g.drawOval(x, y, width, height);
 		
 	}
+
 	
 	
 	
