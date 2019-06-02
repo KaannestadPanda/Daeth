@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +19,9 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
-	int currentState = GAME_STATE;
+	int currentState = MENU_STATE;
 	ObbjectManager manager=new ObbjectManager(player);
-	
+	Font titleFont=new Font("Arial",Font.PLAIN,24);
 	
 	Timer timer;
 	
@@ -30,7 +32,9 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	}
 	
 	void startGame() {
-		manager.addEnemy(new Enemy(20,20,10,10));
+		manager.addEnemy(new Enemy(20,20,10,10,10));
+		manager.addEnemy(new Enemy(400,200,10,10,2));
+		manager.addEnemy(new Enemy(800,400,10,10,3));
 		timer.start();
 	}
 	
@@ -58,6 +62,10 @@ void updateMenuState() {
 	
 }
 	void updateGameState() {
+		manager.checkCollision();
+		if(player.isAlive==false) {
+			currentState=END_STATE;
+		}
 		manager.update();
 	}
 	
@@ -71,7 +79,9 @@ void drawGameState(Graphics g) {
 	}
 
 void drawMenuState(Graphics g) {
-	
+	g.setColor(Color.BLACK);
+	g.setFont(titleFont);
+	g.drawString("GET READY TO RUN", 100, 100);
 }
 	
 	
@@ -87,9 +97,7 @@ void drawMenuState(Graphics g) {
 		// TODO Auto-generated method stub
 		
 		
-			 if(e.getKeyCode()==KeyEvent.VK_D) {
-				player.rightPressed=true;
-			}
+			 
 			 		
 		
 	}
@@ -98,10 +106,13 @@ void drawMenuState(Graphics g) {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		
-		 if(e.getKeyCode()==KeyEvent.VK_D) {
-			player.rightPressed=false;
-		}
+		if(e.getKeyCode()==10) {
+			 currentState++;
+		 }
+		 if(currentState>2) {
+			 currentState=0;
+		 }
+		 
 		
 		
 	}
@@ -135,6 +146,7 @@ void drawMenuState(Graphics g) {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
 		player.x=e.getX()-6;
 		player.y=e.getY()-30;
 	}

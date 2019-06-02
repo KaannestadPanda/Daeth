@@ -2,26 +2,56 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Enemy extends GammeObject{
-
-	Enemy(int newX, int newY, int newWidth, int newHeight) {
+	int enemySpeed = 0;
+	int diagonalSpeed=3;
+	Enemy(int newX, int newY, int newWidth, int newHeight, int speed) {
 		super(newX, newY, newWidth, newHeight);
 		// TODO Auto-generated constructor stub
+		enemySpeed=speed;
 	}
-	int enemySpeed = 3;
+	
 	
 	void update(Player p) {
+		
+		if(Math.abs(p.x-x)<enemySpeed&&Math.abs(p.y-y)<enemySpeed) {
+			x=p.x;
+			y=p.y;
+		}
+		
+		if(Math.abs(p.x-x)==Math.abs(p.y-y)) {
+			if(x>p.x) {
+				x-=diagonalSpeed;
+			}
+			if(x<p.x) {
+				x+=diagonalSpeed;
+		}
+			if(y>p.y) {
+				y-=diagonalSpeed;
+			}
+			if(y<p.y) {
+				y+=diagonalSpeed;
+			}
+		}
+		
+		else if(Math.abs(p.x-x)>Math.abs(p.y-y)) {
 		if(x>p.x) {
 			x-=enemySpeed;
 		}
 		if(x<p.x) {
 			x+=enemySpeed;
 		}
+		}
+		
+	
+		else if(Math.abs(p.x-x)<Math.abs(p.y-y)){
 		if(y>p.y) {
 			y-=enemySpeed;
 		}
 		if(y<p.y) {
 			y+=enemySpeed;
 		}
+		}
+		
 		
 	}
 	

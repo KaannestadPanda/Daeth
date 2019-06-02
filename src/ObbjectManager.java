@@ -12,6 +12,7 @@ public class ObbjectManager {
 	}
 	
 	void update() {
+		
 		play.update();
 		for(int i = zergs.size()-1;i>=0;i--) {
 			zergs.get(i).update(play);
@@ -30,6 +31,19 @@ public class ObbjectManager {
 	
 	void addEnemy(Enemy e){
 		zergs.add(e);
+	}
+	
+	void checkCollision() {
+		for(int i=zergs.size()-1;i>0;i--) {
+			
+			if(zergs.get(i).collisionBox.intersects(play.collisionBox)){
+				
+				play.isAlive=false;
+				
+			}
+			
+		}
+		
 	}
 	
 }

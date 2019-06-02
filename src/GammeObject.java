@@ -3,11 +3,7 @@ import java.awt.Rectangle;
 
 public class GammeObject {
 
-	Boolean leftPressed=false;
-	Boolean rightPressed=false;
-	Boolean upPressed=false;
-	Boolean downPressed=false;
-	Boolean spacePressed=false;
+	
 	Boolean isAlive=true;
 	int x;
     int y;

@@ -14,9 +14,7 @@ public class Player extends GammeObject{
 	void update() {
 		
 		
-	if(rightPressed==true) {
-		x+=speed;
-		}
+	
 	
 	
 	
