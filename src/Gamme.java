@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -22,6 +23,8 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	int currentState = MENU_STATE;
 	ObbjectManager manager=new ObbjectManager(player);
 	Font titleFont=new Font("Arial",Font.PLAIN,24);
+	static boolean alreadyRan=true;
+	
 	
 	Timer timer;
 	
@@ -32,9 +35,20 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	}
 	
 	void startGame() {
-		manager.addEnemy(new Enemy(20,20,10,10,10));
-		manager.addEnemy(new Enemy(400,200,10,10,2));
-		manager.addEnemy(new Enemy(800,400,10,10,3));
+		Random ran=new Random();
+//		manager.addEnemy(new Enemy(20,20,10,10,5));
+//		manager.addEnemy(new Enemy(400,200,10,10,2));
+//		manager.addEnemy(new Enemy(800,400,10,10,3));
+//		
+//		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,1));
+//		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,4));
+//		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,6));
+		
+		for(int i=0; i<6400; i++) {
+		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,1));
+		}
+		
+		
 		timer.start();
 	}
 	
@@ -62,11 +76,14 @@ void updateMenuState() {
 	
 }
 	void updateGameState() {
-		manager.checkCollision();
+		
+		manager.update();
 		if(player.isAlive==false) {
 			currentState=END_STATE;
 		}
-		manager.update();
+		
+		pause(4000);
+		
 	}
 	
 	
@@ -76,6 +93,7 @@ void updateMenuState() {
 	
 void drawGameState(Graphics g) {
 		manager.draw(g);
+		
 	}
 
 void drawMenuState(Graphics g) {
@@ -108,6 +126,7 @@ void drawMenuState(Graphics g) {
 		
 		if(e.getKeyCode()==10) {
 			 currentState++;
+			 
 		 }
 		 if(currentState>2) {
 			 currentState=0;
@@ -175,6 +194,18 @@ void drawMenuState(Graphics g) {
 		// TODO Auto-generated method stub
 		player.x=e.getX()-6;
 		player.y=e.getY()-30;
+	}
+	
+	public static void pause(int milli) {
+		if(alreadyRan==false) {
+			try {
+				Thread.sleep(milli);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			alreadyRan=true;
+			}
 	}
 
 	

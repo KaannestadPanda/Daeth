@@ -13,7 +13,7 @@ public class Player extends GammeObject{
 	
 	void update() {
 		
-		
+		super.update();
 	
 	
 	

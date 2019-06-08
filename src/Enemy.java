@@ -13,9 +13,12 @@ public class Enemy extends GammeObject{
 	
 	void update(Player p) {
 		
+		
+		
 		if(Math.abs(p.x-x)<enemySpeed&&Math.abs(p.y-y)<enemySpeed) {
 			x=p.x;
 			y=p.y;
+			//p.isAlive=false;
 		}
 		
 		if(Math.abs(p.x-x)==Math.abs(p.y-y)) {
@@ -57,7 +60,7 @@ public class Enemy extends GammeObject{
 	
 	void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawOval(x, y, width, height);
+		g.fillOval(x, y, width, height);
 	}
 
 }
