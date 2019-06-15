@@ -36,17 +36,14 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	
 	void startGame() {
 		Random ran=new Random();
-//		manager.addEnemy(new Enemy(20,20,10,10,5));
-//		manager.addEnemy(new Enemy(400,200,10,10,2));
-//		manager.addEnemy(new Enemy(800,400,10,10,3));
-//		
-//		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,1));
-//		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,4));
-//		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,6));
+		manager.addEnemy(new Enemy(20,20,10,10,1));
+		manager.addEnemy(new Enemy(400,200,10,10,2));
+		manager.addEnemy(new Enemy(800,400,10,10,3));
 		
-		for(int i=0; i<6400; i++) {
-		manager.addEnemy(new Enemy(ran.nextInt(1910),ran.nextInt(990),10,10,1));
-		}
+		
+		
+		
+
 		
 		
 		timer.start();

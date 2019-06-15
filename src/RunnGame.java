@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class RunnGame {
 
@@ -8,6 +9,7 @@ public class RunnGame {
 	JFrame frame;
 	final static int width=1920;
 	final static int height=1000;
+
 	
 	public static void main(String[] args) {
 		RunnGame k=new RunnGame();
@@ -33,6 +35,8 @@ public class RunnGame {
 		}
 		
 		void setup() {
+			
+
 			frame.add(gamme);
 			frame.addKeyListener(gamme);
 			frame.addMouseListener(gamme);

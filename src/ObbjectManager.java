@@ -2,9 +2,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ObbjectManager {
 
+	
+	long timeTimer=1000;
+	boolean spawn6Already=false;
+	
+	
+	int seconds=-1;
+	
+	
 	Player play;
 	ArrayList<Enemy> zergs=new ArrayList<Enemy>();
 	int life=500;
@@ -17,6 +29,8 @@ public class ObbjectManager {
 	
 	void update() {
 		frameCount++;
+		
+		
 		if(frameCount==2) {
 			Gamme.alreadyRan=false;
 		}
@@ -27,9 +41,28 @@ public class ObbjectManager {
 		}
 		
 		
+		
 	}
 	
 	void draw(Graphics g) {
+		timeDoStuff(g);
+
+		if(life<100) {
+			g.setColor(Color.RED);
+		}
+		else if(life<200) {
+			g.setColor(Color.ORANGE);
+		}
+		else if(life<300) {
+			g.setColor(Color.YELLOW);
+		}
+		else {
+			g.setColor(Color.GREEN);
+		}
+		
+		
+		g.fillRect(660, 930, life, 30);
+		
 		g.setColor(Color.BLUE);
 		g.fillRect(860,450,100,100);
 		play.draw(g);
@@ -46,21 +79,11 @@ public class ObbjectManager {
 			}
 		}
 		
-		if(life<100) {
-			g.setColor(Color.RED);
-		}
-		else if(life<200) {
-			g.setColor(Color.ORANGE);
-		}
-		else if(life<300) {
-			g.setColor(Color.YELLOW);
-		}
-		else {
-			g.setColor(Color.GREEN);
-		}
 		
+		manageTime();
+		g.setColor(Color.BLACK);
 		
-		g.fillRect(660, 950, life, 10);
+		g.drawString(""+seconds, 10, 10);
 		
 		
 		
@@ -70,7 +93,55 @@ public class ObbjectManager {
 		zergs.add(e);
 	}
 	
+	
+	void manageTime() {
+		if(System.currentTimeMillis()-timeTimer>=1000){
+			seconds++;
+			
+			timeTimer=System.currentTimeMillis();
+		
+//            addAlien(new Alien(new Random().nextInt(LeagueInvaders.width-50), -60, 50, 50));
+//
+//enemyTimer = System.currentTimeMillis();
+	}
+	
 
+	
+}
+	
+	
+	void timeDoStuff(Graphics g) {
+		if(seconds==5) {
+			g.setColor(Color.ORANGE);
+			g.fillOval(20, 20, 30, 30);
+			g.fillOval(400, 200, 30, 30);
+			g.fillOval(800, 400, 30, 30);
+		}
+		if(seconds==6) {
+			if(spawn6Already==false) {
+			addEnemy(new Enemy(20,20,10,10,4));
+			addEnemy(new Enemy(400,200,10,10,5));
+			addEnemy(new Enemy(800,400,10,10,6));
+			spawn6Already=true;
+			}
+			
+		}
+		
+		if(seconds==11) {
+			g.setColor(Color.ORANGE);
+			g.fillOval(20, 20, 30, 30);
+			g.fillOval(400, 200, 30, 30);
+			g.fillOval(800, 400, 30, 30);
+		}
+		
+		if(seconds==12) {
+			
+			addEnemy(new Enemy(20,20,10,10,7));
+			addEnemy(new Enemy(400,200,10,10,8));
+			addEnemy(new Enemy(800,400,10,10,9));
+		}
+		
+	}
 	
 	
 	

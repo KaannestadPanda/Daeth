@@ -18,21 +18,21 @@ public class Enemy extends GammeObject{
 		if(Math.abs(p.x-x)<enemySpeed&&Math.abs(p.y-y)<enemySpeed) {
 			x=p.x;
 			y=p.y;
-			//p.isAlive=false;
+			p.isAlive=false;
 		}
 		
-		if(Math.abs(p.x-x)==Math.abs(p.y-y)) {
+		if(Math.abs(Math.abs(p.x-x)-Math.abs(p.y-y))<=enemySpeed) {
 			if(x>p.x) {
-				x-=diagonalSpeed;
+				x-=enemySpeed;
 			}
 			if(x<p.x) {
-				x+=diagonalSpeed;
+				x+=enemySpeed;
 		}
 			if(y>p.y) {
-				y-=diagonalSpeed;
+				y-=enemySpeed;
 			}
 			if(y<p.y) {
-				y+=diagonalSpeed;
+				y+=enemySpeed;
 			}
 		}
 		
