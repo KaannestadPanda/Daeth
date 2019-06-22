@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -17,10 +18,12 @@ import javax.swing.Timer;
 public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMotionListener,  MouseListener{
 
 	Player player=new Player(500,500,10,10);
+	
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	Buttonn clicky=new Buttonn(860,450,100,100);
 	ObbjectManager manager=new ObbjectManager(player);
 	Font titleFont=new Font("Arial",Font.PLAIN,24);
 	static boolean alreadyRan=true;
@@ -35,7 +38,7 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	}
 	
 	void startGame() {
-		Random ran=new Random();
+		
 		manager.addEnemy(new Enemy(20,20,10,10,1));
 		manager.addEnemy(new Enemy(400,200,10,10,2));
 		manager.addEnemy(new Enemy(800,400,10,10,3));
@@ -53,6 +56,9 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
+		
+		
+		
 		if(currentState==MENU_STATE) {
 			updateMenuState();
 		}
@@ -70,6 +76,10 @@ void updateEndState() {
 		
 	}
 void updateMenuState() {
+	if(clicky.clicked==true) {
+		currentState=GAME_STATE;
+		clicky.clicked=false;
+	}
 	
 }
 	void updateGameState() {
@@ -97,6 +107,7 @@ void drawMenuState(Graphics g) {
 	g.setColor(Color.BLACK);
 	g.setFont(titleFont);
 	g.drawString("GET READY TO RUN", 100, 100);
+	clicky.draw(g);
 }
 	
 	
@@ -121,13 +132,17 @@ void drawMenuState(Graphics g) {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		if(e.getKeyCode()==10) {
-			 currentState++;
-			 
-		 }
-		 if(currentState>2) {
+		if(e.getKeyCode()==10&&currentState==END_STATE) {
+			player=new Player(500,500,10,10);
+			 manager=new ObbjectManager(player);
 			 currentState=0;
-		 }
+			
+			 startGame();
+			 
+			 
+		 
+		 
+		}
 		 
 		
 		

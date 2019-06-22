@@ -19,6 +19,7 @@ public class ObbjectManager {
 	
 	Player play;
 	ArrayList<Enemy> zergs=new ArrayList<Enemy>();
+	
 	int life=500;
 	Rectangle r=new Rectangle(860,450,100,100);
 	int frameCount=0;
@@ -34,11 +35,13 @@ public class ObbjectManager {
 		if(frameCount==2) {
 			Gamme.alreadyRan=false;
 		}
+		
 		play.update();
 		for(int i = zergs.size()-1;i>=0;i--) {
 			zergs.get(i).update(play);
 
 		}
+		
 		
 		
 		
@@ -100,9 +103,7 @@ public class ObbjectManager {
 			
 			timeTimer=System.currentTimeMillis();
 		
-//            addAlien(new Alien(new Random().nextInt(LeagueInvaders.width-50), -60, 50, 50));
-//
-//enemyTimer = System.currentTimeMillis();
+
 	}
 	
 
