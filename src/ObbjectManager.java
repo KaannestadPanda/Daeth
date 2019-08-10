@@ -11,8 +11,9 @@ public class ObbjectManager {
 
 	
 	long timeTimer=1000;
-	boolean spawn6Already=false;
 	
+	Random ranX=new Random();
+	Random ranY=new Random();
 	
 	int seconds=-1;
 	
@@ -78,7 +79,7 @@ public class ObbjectManager {
 		else {
 			life--;
 			if(life<=0) {
-				play.isAlive=false;
+				//play.isAlive=false;
 			}
 		}
 		
@@ -109,11 +110,12 @@ public class ObbjectManager {
 
 	
 }
-	
+	int spawn12Already=0;
+	boolean spawn6Already=false;
 	
 	void timeDoStuff(Graphics g) {
 		if(seconds==5) {
-			g.setColor(Color.ORANGE);
+			g.setColor(Color.GREEN);
 			g.fillOval(20, 20, 30, 30);
 			g.fillOval(400, 200, 30, 30);
 			g.fillOval(800, 400, 30, 30);
@@ -129,18 +131,45 @@ public class ObbjectManager {
 		}
 		
 		if(seconds==11) {
-			g.setColor(Color.ORANGE);
-			g.fillOval(20, 20, 30, 30);
-			g.fillOval(400, 200, 30, 30);
-			g.fillOval(800, 400, 30, 30);
+			g.setColor(Color.YELLOW);
+			g.fillOval(1879,54, 30, 30);
+			g.fillOval(1877,911, 30, 30);
+			g.fillOval(35,919, 30, 30);
+			g.fillOval(36,53, 30, 30);
 		}
 		
 		if(seconds==12) {
+			if(spawn12Already<20) {
+			addEnemy(new Enemy(1879,54,10,10,7));
+			addEnemy(new Enemy(1877,911,10,10,8));
+			addEnemy(new Enemy(35,919,10,10,9));
+			addEnemy(new Enemy(36,53,10,10,9));
 			
-			addEnemy(new Enemy(20,20,10,10,7));
-			addEnemy(new Enemy(400,200,10,10,8));
-			addEnemy(new Enemy(800,400,10,10,9));
+			
+			spawn12Already++;
+			}
 		}
+		
+		
+		int x18=ranX.nextInt(1911);
+		int y18 = ranY.nextInt(981);
+		if(seconds==17) {
+			g.setColor(Color.YELLOW);
+			
+			
+			
+			g.fillOval(x18,y18,60, 60);
+		}
+		
+		
+		boolean spawn18Already=false;
+		if(seconds==18) {
+			if(spawn18Already==false) {
+				addEnemy(new Enemy(x18,y18,60,60,2));
+				spawn18Already=true;
+			}
+		}
+		
 		
 	}
 	
