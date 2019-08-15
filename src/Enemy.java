@@ -12,45 +12,49 @@ public class Enemy extends GammeObject{
 	
 	
 	void update(Player p) {
+		int radiuss=width/2;
 		
+		int radius=radiuss-5;
 		
-		
-		if(Math.abs(p.x-x)<enemySpeed&&Math.abs(p.y-y)<enemySpeed) {
-			x=p.x;
-			y=p.y;
+
+		if(Math.abs(p.x-radius-x)<enemySpeed&&Math.abs(p.y-radius-y)<enemySpeed) {
+			x=p.x-radius;
+			y=p.y-radius;
 			//p.isAlive=false;
 		}
+
 		
-		if(Math.abs(Math.abs(p.x-x)-Math.abs(p.y-y))<=enemySpeed) {
-			if(x>p.x) {
+		
+		if(Math.abs(Math.abs(p.x-radius-x)-Math.abs(p.y-radius-y))<=enemySpeed) {
+			if(x>p.x-radius) {
 				x-=enemySpeed;
 			}
-			if(x<p.x) {
+			if(x<p.x-radius) {
 				x+=enemySpeed;
 		}
-			if(y>p.y) {
+			if(y>p.y-radius) {
 				y-=enemySpeed;
 			}
-			if(y<p.y) {
+			if(y<p.y-radius) {
 				y+=enemySpeed;
 			}
 		}
 		
-		else if(Math.abs(p.x-x)>Math.abs(p.y-y)) {
-		if(x>p.x) {
+		else if(Math.abs(p.x-radius-x)>Math.abs(p.y-radius-y)) {
+		if(x>p.x-radius) {
 			x-=enemySpeed;
 		}
-		if(x<p.x) {
+		if(x<p.x-radius) {
 			x+=enemySpeed;
 		}
 		}
 		
 	
-		else if(Math.abs(p.x-x)<Math.abs(p.y-y)){
-		if(y>p.y) {
+		else if(Math.abs(p.x-radius-x)<Math.abs(p.y-radius-y)){
+		if(y>p.y-radius) {
 			y-=enemySpeed;
 		}
-		if(y<p.y) {
+		if(y<p.y-radius) {
 			y+=enemySpeed;
 		}
 		}
@@ -59,6 +63,8 @@ public class Enemy extends GammeObject{
 	}
 	
 	void draw(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.drawRect(x,y,width,height);
 		g.setColor(Color.RED);
 		g.fillOval(x, y, width, height);
 	}

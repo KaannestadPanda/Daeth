@@ -32,10 +32,12 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	int clickedY;
 	
 	Timer timer;
+	Timer enemyTimer;
 	
 	Gamme(){
 		timer = new Timer(1000/60,this);
-		
+		enemyTimer = new Timer(1000 , manager);
+	   
 		
 	}
 	
@@ -50,7 +52,7 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 		
 
 		
-		
+		 enemyTimer.start();
 		timer.start();
 	}
 	
