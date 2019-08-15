@@ -24,6 +24,10 @@ public class ObbjectManager implements ActionListener{
 	
 	int seconds=-1;
 	
+	
+	int spawn12Already=0;
+	boolean spawn6Already=false;
+	
 	int x18=ranX.nextInt(1911);
 	int y18 = ranY.nextInt(981);
 	boolean spawn18Already=false;
@@ -77,6 +81,7 @@ public class ObbjectManager implements ActionListener{
 		else {
 			g.setColor(Color.GREEN);
 		}
+		g.fillRect(660, 930, life, 30);
 		
 		
 		
@@ -95,18 +100,13 @@ public class ObbjectManager implements ActionListener{
 		}
 		else if(seconds==17) {
 			g.setColor(Color.ORANGE);
-			
-			
-			
 			g.fillOval(x18,y18,60, 60);
 		}
 		else if(seconds==23) {
 			g.setColor(Color.ORANGE);
-			
-			
-			
 			g.fillOval(x24,y24,120, 120);
 		}
+		
 		
 		
 if((seconds+1)>=30&&(seconds+1)%6==0) {
@@ -138,7 +138,7 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 		
 		
 		
-		g.fillRect(660, 930, life, 30);
+		
 		
 		g.setColor(Color.BLUE);
 		g.fillRect(860,450,100,100);
@@ -183,8 +183,7 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 
 	
 
-	int spawn12Already=0;
-	boolean spawn6Already=false;
+	
 	
 	void timeDoStuff() {
 		
