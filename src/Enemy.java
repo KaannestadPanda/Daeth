@@ -20,7 +20,7 @@ public class Enemy extends GammeObject{
 		if(Math.abs(p.x-radius-x)<enemySpeed&&Math.abs(p.y-radius-y)<enemySpeed) {
 			x=p.x-radius;
 			y=p.y-radius;
-			//p.isAlive=false;
+			p.isAlive=false;
 		}
 
 		
@@ -63,8 +63,8 @@ public class Enemy extends GammeObject{
 	}
 	
 	void draw(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.drawRect(x,y,width,height);
+	//	g.setColor(Color.BLACK);
+		//g.drawRect(x,y,width,height);
 		g.setColor(Color.RED);
 		g.fillOval(x, y, width, height);
 	}

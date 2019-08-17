@@ -17,14 +17,14 @@ import javax.swing.Timer;
 
 public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMotionListener,  MouseListener{
 
-	Player player=new Player(500,500,10,10);
+	static Player player=new Player(500,500,10,10);
 	
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	Buttonn clicky=new Buttonn(860,450,100,100);
-	ObbjectManager manager=new ObbjectManager(player);
+	static ObbjectManager manager=new ObbjectManager(player);
 	Font titleFont=new Font("Arial",Font.PLAIN,24);
 	static boolean alreadyRan=true;
 	
@@ -32,11 +32,11 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	int clickedY;
 	
 	Timer timer;
-	Timer enemyTimer;
+	static Timer enemyTimer;
 	
 	Gamme(){
 		timer = new Timer(1000/60,this);
-		enemyTimer = new Timer(1000 , manager);
+		
 	   
 		
 	}
@@ -52,7 +52,7 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 		
 
 		
-		 enemyTimer.start();
+		 
 		timer.start();
 	}
 	
@@ -184,6 +184,7 @@ void drawMenuState(Graphics g) {
 		clickedY=e.getY()-24;
 		
 		if(currentState==MENU_STATE&&clicky.checkClicked(clickedX, clickedY)) {
+			manager.seconds=0;
 			currentState=GAME_STATE;
 			clicky.clicked=false;
 		}
@@ -236,11 +237,14 @@ void drawMenuState(Graphics g) {
 		if(alreadyRan==false) {
 			try {
 				Thread.sleep(milli);
+				enemyTimer = new Timer(200 , manager);
+				enemyTimer.start();
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			alreadyRan=true;
+			
 			}
 	}
 

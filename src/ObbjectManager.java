@@ -11,6 +11,10 @@ import javax.swing.JTextField;
 
 public class ObbjectManager implements ActionListener{
 
+	int phaseCount=0;
+	
+	
+	int rand;
 	
 	long timeTimer=1000;
 	
@@ -19,10 +23,10 @@ public class ObbjectManager implements ActionListener{
 	
 	Random randomNum=new Random();
 	
-	int randX=ranX.nextInt(1911);
-	int randY = ranY.nextInt(981);
+	int randX;
+	int randY;
 	
-	int seconds=-1;
+	int seconds;
 	
 	
 	int spawn12Already=0;
@@ -42,6 +46,11 @@ public class ObbjectManager implements ActionListener{
 	int life=500;
 	Rectangle r=new Rectangle(860,450,100,100);
 	int frameCount=0;
+	
+	
+	int warningSpawned=0;
+	boolean enemySpawned=false;
+	int randomSpeed;
 	
 	ObbjectManager(Player z){
 		play=z;
@@ -109,9 +118,21 @@ public class ObbjectManager implements ActionListener{
 		
 		
 		
+		
+		
+		
 if((seconds+1)>=30&&(seconds+1)%6==0) {
 			
-			int rand=randomNum.nextInt(3);
+	//for(int i=0;i<phaseCount;i++) {
+	if(warningSpawned<phaseCount) {
+	
+			rand=randomNum.nextInt(3);
+			 randX=ranX.nextInt(1911);
+			 randY = ranY.nextInt(981);
+			
+			warningSpawned++;
+	}
+			
 				if(rand==0) {
 					g.setColor(Color.BLUE);
 					g.fillOval(randX, randY, 10, 10);
@@ -132,9 +153,22 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 				}
 			
 			
-			
-			
-		}
+	}
+
+	//	}
+
+if(seconds>=30&&seconds%6==0) {
+	warningSpawned=0;
+}
+
+
+
+if(seconds%60==0) {
+	phaseCount++;
+}
+
+
+
 		
 		
 		
@@ -152,15 +186,15 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 		else {
 			life--;
 			if(life<=0) {
-				//play.isAlive=false;
+				play.isAlive=false;
 			}
 		}
 		
 		
-		manageTime();
+		
 		g.setColor(Color.BLACK);
 		
-		g.drawString(""+seconds, 10, 10);
+		g.drawString(phaseCount+"   "+seconds, 10, 10);
 		
 		
 		
@@ -171,14 +205,7 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 	}
 	
 	
-	void manageTime() {
-		
-			
-			
-			
-		
-
-	}
+	
 	
 
 	
@@ -239,6 +266,46 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 		}
 		
 		
+		if(seconds>=30&&seconds%6==0) {
+			
+			if(enemySpawned==false) {
+			randomSpeed=ranX.nextInt(5);
+				randomSpeed++;
+					
+			enemySpawned=true;		
+			}
+					
+						if(rand==0) {
+							
+							addEnemy(new Enemy(randX,randY,10,10,1));
+							addEnemy(new Enemy(randX,randY,10,10,2));
+							addEnemy(new Enemy(randX,randY,10,10,3));
+							addEnemy(new Enemy(randX,randY,10,10,4));
+							addEnemy(new Enemy(randX,randY,10,10,5));
+							addEnemy(new Enemy(randX,randY,10,10,6));
+							addEnemy(new Enemy(randX,randY,10,10,7));
+						}
+						else if(rand==1) {
+							
+							addEnemy(new Enemy(randX,randY,60,60,randomSpeed));
+							
+						}
+
+						else if(rand==2) {
+							
+							addEnemy(new Enemy(randX,randY,120,120,randomSpeed));
+							
+			
+						}
+						enemySpawned=false;
+			}
+					
+			
+					
+				
+		
+		
+		
 		
 		
 		
@@ -256,6 +323,7 @@ if((seconds+1)>=30&&(seconds+1)%6==0) {
 		// TODO Auto-generated method stub
 		seconds++;
 		timeDoStuff();
+		
 	}
 	
 	
