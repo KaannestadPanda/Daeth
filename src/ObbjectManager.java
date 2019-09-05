@@ -14,6 +14,8 @@ public class ObbjectManager implements ActionListener {
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
 
+	PowerUp power;
+	
 	int rand;
 
 	long timeTimer = 1000;
@@ -28,16 +30,11 @@ public class ObbjectManager implements ActionListener {
 
 	int seconds;
 
-	int spawn12Already = 0;
-	boolean spawn6Already = false;
+	
 
-	int x18 = ranX.nextInt(1911);
-	int y18 = ranY.nextInt(981);
-	boolean spawn18Already = false;
+	
 
-	int x24 = ranX.nextInt(1911);
-	int y24 = ranY.nextInt(981);
-	boolean spawn24Already = false;
+	
 
 	Player play;
 	ArrayList<Enemy> zergs = new ArrayList<Enemy>();
@@ -46,8 +43,7 @@ public class ObbjectManager implements ActionListener {
 	Rectangle r = new Rectangle(860, 450, 100, 100);
 	int frameCount = 0;
 
-	boolean warningSpawned = false;
-	boolean enemySpawned = false;
+	
 	int randomSpeed;
 
 	ObbjectManager(Player z) {
@@ -144,7 +140,7 @@ public class ObbjectManager implements ActionListener {
 		} else {
 			life--;
 			if (life <= 0) {
-				// play.isAlive=false;
+				//play.isAlive=false;
 			}
 		}
 
@@ -161,63 +157,50 @@ public class ObbjectManager implements ActionListener {
 	void timeDoStuff() {
 
 		if (seconds == 6) {
-			if (spawn6Already == false) {
+			
 				addEnemy(new Enemy(20, 20, 10, 10, 4));
 				addEnemy(new Enemy(400, 200, 10, 10, 5));
 				addEnemy(new Enemy(800, 400, 10, 10, 6));
-				spawn6Already = true;
-			}
+				
+			
 
 		}
 
 		if (seconds == 12) {
-			if (spawn12Already < 10) {
+			
 				addEnemy(new Enemy(1879, 54, 10, 10, 7));
 				addEnemy(new Enemy(1877, 911, 10, 10, 8));
 				addEnemy(new Enemy(35, 919, 10, 10, 9));
 				addEnemy(new Enemy(36, 53, 10, 10, 9));
 
-				spawn12Already++;
-			}
+				
+			
 		}
 
 		if (seconds == 18) {
-			if (spawn18Already == false) {
-				addEnemy(new Enemy(x18, y18, 60, 60, 5));
-				spawn18Already = true;
-			}
+			
+				addEnemy(new Enemy(ranX.nextInt(1911), ranY.nextInt(901), 60, 60, 5));
+				
+			
 		}
 
 		if (seconds == 24) {
-			if (spawn24Already == false) {
-				addEnemy(new Enemy(x24, y24, 120, 120, 2));
-				spawn24Already = true;
-			}
-		}
-
-		if ((seconds + 1) >= 30 && (seconds + 1) % 6 == 0) {
-
-			if (warningSpawned == false) {
-
-				rand = randomNum.nextInt(3);
-				randX = ranX.nextInt(1911);
-				randY = ranY.nextInt(981);
-
-				warningSpawned = true;
-			}
-
 			
-
+				addEnemy(new Enemy(ranX.nextInt(1911), ranY.nextInt(901), 120, 120, 2));
+				
+			
 		}
+
+
 
 		if (seconds >= 30 && seconds % 6 == 0) {
 
-			if (enemySpawned == false) {
+			
 				randomSpeed = ranX.nextInt(5);
 				randomSpeed++;
 
-				enemySpawned = true;
-			}
+			
+			
 
 			if (rand == 0) {
 
@@ -230,13 +213,13 @@ public class ObbjectManager implements ActionListener {
 				addEnemy(new Enemy(randX, randY, 10, 10, 7));
 				rand = randomNum.nextInt(3);
 				randX = ranX.nextInt(1911);
-				randY = ranY.nextInt(981);
+				randY = ranY.nextInt(901);
 			} else if (rand == 1) {
 
 				addEnemy(new Enemy(randX, randY, 60, 60, randomSpeed));
 				rand = randomNum.nextInt(3);
 				randX = ranX.nextInt(1911);
-				randY = ranY.nextInt(981);
+				randY = ranY.nextInt(901);
 			}
 
 			else if (rand == 2) {
@@ -244,19 +227,28 @@ public class ObbjectManager implements ActionListener {
 				addEnemy(new Enemy(randX, randY, 120, 120, randomSpeed));
 				rand = randomNum.nextInt(3);
 				randX = ranX.nextInt(1911);
-				randY = ranY.nextInt(981);
+				randY = ranY.nextInt(901);
 			}
-			enemySpawned = false;
+			
 		}
 
+	}
+	
+	void powerUpCall() {
+		if(1==4) {
+			int powerX=ranX.nextInt(1911);
+		int powerY=ranY.nextInt(901);	
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		seconds++;
+		powerUpCall();
+		for(int i=0;i<phaseCount;i++) {
 		timeDoStuff();
-		timeDoStuff();
+		}
 
 	}
 

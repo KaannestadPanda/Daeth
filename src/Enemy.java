@@ -12,7 +12,7 @@ public class Enemy extends GammeObject{
 	Enemy(int newX, int newY, int newWidth, int newHeight, int speed) {
 		super(newX, newY, newWidth, newHeight);
 		// TODO Auto-generated constructor stub
-		enemySpeed=speed;
+		enemySpeed=speed+=2;
 		duration =1000;
 		startTime=System.currentTimeMillis();
 		
@@ -28,10 +28,14 @@ public class Enemy extends GammeObject{
 		
 		int radius=radiuss-5;
 		
+		int widthOrSpeed;
+		//if(r)
+		
 
 		if(Math.abs(p.x-radius-x)<enemySpeed&&Math.abs(p.y-radius-y)<enemySpeed) {
 			x=p.x-radius;
 			y=p.y-radius;
+			
 			//p.isAlive=false;
 		}
 

@@ -11,7 +11,7 @@ public class GammeObject {
     int width;
     int height;
     Rectangle collisionBox;
-   // Ellipse2D collisionCircle;
+   
 
 GammeObject(int newX, int newY, int newWidth, int newHeight){
 	x=newX;
@@ -23,7 +23,7 @@ GammeObject(int newX, int newY, int newWidth, int newHeight){
 
 void update() {
 	collisionBox.setBounds(x, y, width, height);
-	//collisionCircle.
+	
 }
 
 void draw(Graphics ge) {

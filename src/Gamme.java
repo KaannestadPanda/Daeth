@@ -237,7 +237,7 @@ void drawMenuState(Graphics g) {
 		if(alreadyRan==false) {
 			try {
 				Thread.sleep(milli);
-				enemyTimer = new Timer(200 , manager);
+				enemyTimer = new Timer(500 , manager);
 				enemyTimer.start();
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
