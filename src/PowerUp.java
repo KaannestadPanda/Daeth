@@ -3,6 +3,8 @@ import java.awt.Graphics;
 
 public class PowerUp extends GammeObject{
 
+	boolean isAlive=false;
+	
 	PowerUp(int newX, int newY, int newWidth, int newHeight) {
 		super(newX, newY, newWidth, newHeight);
 		// TODO Auto-generated constructor stub
@@ -19,16 +21,22 @@ public class PowerUp extends GammeObject{
 	
 	void update(Player p) {
 		
-		
-		if(Math.abs(p.x-radius-x)<20||Math.abs(p.y-radius-y)<20) {
-			
+		if(isAlive) {
+		if(Math.abs(p.x-(radius-x))<20||Math.abs(p.y-(radius-y))<20) {
+			p.powerUpCount++;
+			isAlive=false;
 		}
+		
+		}
+		
 	}
 	
 	
 	void draw(Graphics g) {
+		if(isAlive) {
 		g.setColor(Color.BLUE);
 		g.fillOval(x, y, width, height);
+		}
 	}
 	
 	

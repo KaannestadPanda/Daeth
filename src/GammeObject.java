@@ -10,19 +10,19 @@ public class GammeObject {
     int y;
     int width;
     int height;
-    Rectangle collisionBox;
-   
+    CollisionCircle collisionBox;
+    int radius=width/2;
 
 GammeObject(int newX, int newY, int newWidth, int newHeight){
 	x=newX;
 	y=newY;
 	width=newWidth;
 	height=newHeight;
-	collisionBox=new Rectangle(x,y,width,height);
+	collisionBox=new CollisionCircle(x,y,width);
 }
 
 void update() {
-	collisionBox.setBounds(x, y, width, height);
+	collisionBox.setBounds(x+radius, y+radius);
 	
 }
 

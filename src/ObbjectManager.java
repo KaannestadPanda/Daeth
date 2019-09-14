@@ -14,7 +14,7 @@ public class ObbjectManager implements ActionListener {
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
 
-	PowerUp power;
+	PowerUp power= new PowerUp(0,0,20,20);
 	
 	int rand;
 
@@ -40,7 +40,9 @@ public class ObbjectManager implements ActionListener {
 	ArrayList<Enemy> zergs = new ArrayList<Enemy>();
 
 	int life = 500;
+	
 	Rectangle r = new Rectangle(860, 450, 100, 100);
+	
 	int frameCount = 0;
 
 	
@@ -58,6 +60,7 @@ public class ObbjectManager implements ActionListener {
 		}
 
 		play.update();
+		power.update();
 		for (int i = zergs.size() - 1; i >= 0; i--) {
 			zergs.get(i).update(play);
 
@@ -66,6 +69,12 @@ public class ObbjectManager implements ActionListener {
 	}
 
 	void draw(Graphics g) {
+		
+		for(int i=0;i<play.powerUpCount;i++) {
+			int ycoord=i*50;
+			g.setColor(Color.CYAN);
+			g.fillOval(50,ycoord,20,20);
+		}
 
 		if (life < 100) {
 			g.setColor(Color.RED);
@@ -77,48 +86,6 @@ public class ObbjectManager implements ActionListener {
 			g.setColor(Color.GREEN);
 		}
 		g.fillRect(660, 930, life, 30);
-
-//		if (seconds == 5) {
-//			g.setColor(Color.ORANGE);
-//			g.fillOval(20, 20, 30, 30);
-//			g.fillOval(400, 200, 30, 30);
-//			g.fillOval(800, 400, 30, 30);
-//		} else if (seconds == 11) {
-//			g.setColor(Color.ORANGE);
-//			g.fillOval(1879, 54, 30, 30);
-//			g.fillOval(1877, 911, 30, 30);
-//			g.fillOval(35, 919, 30, 30);
-//			g.fillOval(36, 53, 30, 30);
-//		} else if (seconds == 17) {
-//			g.setColor(Color.ORANGE);
-//			g.fillOval(x18, y18, 60, 60);
-//		} else if (seconds == 23) {
-//			g.setColor(Color.ORANGE);
-//			g.fillOval(x24, y24, 120, 120);
-//		}
-		
-//		if (rand == 0) {
-//			g.setColor(Color.BLUE);
-//			g.fillOval(randX, randY, 10, 10);
-//
-//		}
-//		if (rand == 1) {
-//			g.setColor(Color.ORANGE);
-//			g.fillOval(randX, randY, 60, 60);
-//
-//		}
-//
-//		if (rand == 2) {
-//			g.setColor(Color.ORANGE);
-//			g.fillOval(randX, randY, 120, 120);
-//
-//		}
-//
-//		// }
-//
-//		if (seconds >= 30 && seconds % 6 == 0) {
-//			warningSpawned = false;
-//		}
 
 		if (seconds % 60 == 0 && updatedPhaseCount == false) {
 			phaseCount++;
@@ -132,10 +99,11 @@ public class ObbjectManager implements ActionListener {
 		g.setColor(Color.BLUE);
 		g.fillRect(860, 450, 100, 100);
 		play.draw(g);
+		power.draw(g);
 		for (int i = zergs.size() - 1; i >= 0; i--) {
 			zergs.get(i).draw(g);
 		}
-		if (play.collisionBox.intersects(r)) {
+		if (play.x>=860&&play.x<=960&&play.y>=450&&play.y<=550) {
 			life = 500;
 		} else {
 			life--;
@@ -146,7 +114,9 @@ public class ObbjectManager implements ActionListener {
 
 		g.setColor(Color.BLACK);
 
-		g.drawString(phaseCount + "   " + seconds, 10, 10);
+		
+		
+		g.drawString("powerups:" +play.powerUpCount+ "  phase:" +phaseCount + "  seconds:" + seconds, 10, 10);
 
 	}
 
@@ -235,10 +205,20 @@ public class ObbjectManager implements ActionListener {
 	}
 	
 	void powerUpCall() {
-		if(1==4) {
+		if(seconds%30==0) {
 			int powerX=ranX.nextInt(1911);
 		int powerY=ranY.nextInt(901);	
+		
+		power.x=powerX;
+		power.y=powerY;
+		power.isAlive=true;
 		}
+		
+		if((seconds-6)%30==0) {
+			power.isAlive=false;
+		}
+		
+		
 	}
 
 	@Override

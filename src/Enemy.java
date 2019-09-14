@@ -22,26 +22,31 @@ public class Enemy extends GammeObject{
 	
 	
 	void update(Player p) {
+		
+		super.update();
+		
 		if(warningg==false) {
 		
-		int radiuss=width/2;
 		
-		int radius=radiuss-5;
 		
-		int widthOrSpeed;
-		//if(r)
 		
-
-		if(Math.abs(p.x-radius-x)<enemySpeed&&Math.abs(p.y-radius-y)<enemySpeed) {
-			x=p.x-radius;
-			y=p.y-radius;
+		
+		
+		
+		int trueX=x+radius;
+		int trueY=y+radius;
+		
+		
+		if(collisionBox.intersectsCircle(p.collisionBox)) {
+			x=p.x;
+			y=p.y;
 			
-			//p.isAlive=false;
+			p.isAlive=false;
 		}
 
 		
 		
-		if(Math.abs(Math.abs(p.x-radius-x)-Math.abs(p.y-radius-y))<=enemySpeed) {
+		if(Math.abs(Math.abs(p.ptruex-trueX)-Math.abs(p.ptruey-trueY))<=enemySpeed) {
 			if(x>p.x-radius) {
 				x-=enemySpeed;
 			}
@@ -56,7 +61,7 @@ public class Enemy extends GammeObject{
 			}
 		}
 		
-		else if(Math.abs(p.x-radius-x)>Math.abs(p.y-radius-y)) {
+		else if(Math.abs(p.ptruex-trueX)>Math.abs(p.ptruey-trueY)) {
 		if(x>p.x-radius) {
 			x-=enemySpeed;
 		}
@@ -66,7 +71,7 @@ public class Enemy extends GammeObject{
 		}
 		
 	
-		else if(Math.abs(p.x-radius-x)<Math.abs(p.y-radius-y)){
+		else if(Math.abs(p.ptruex-trueX)<Math.abs(p.ptruey-trueY)){
 		if(y>p.y-radius) {
 			y-=enemySpeed;
 		}
@@ -75,6 +80,54 @@ public class Enemy extends GammeObject{
 		}
 		}
 		
+		
+		
+		
+		
+
+//		if(Math.abs(p.ptruex-trueX)<enemySpeed&&Math.abs(p.ptruey-trueY)<enemySpeed) {
+//			x=p.x;
+//			y=p.y;
+//			
+//			//p.isAlive=false;
+//		}
+//
+//		
+//		
+//		if(Math.abs(Math.abs(p.ptruex-trueX)-Math.abs(p.ptruey-trueY))<=enemySpeed) {
+//			if(x>p.x-radius) {
+//				x-=enemySpeed;
+//			}
+//			if(x<p.x-radius) {
+//				x+=enemySpeed;
+//		}
+//			if(y>p.y-radius) {
+//				y-=enemySpeed;
+//			}
+//			if(y<p.y-radius) {
+//				y+=enemySpeed;
+//			}
+//		}
+//		
+//		else if(Math.abs(p.ptruex-trueX)>Math.abs(p.ptruey-trueY)) {
+//		if(x>p.x-radius) {
+//			x-=enemySpeed;
+//		}
+//		if(x<p.x-radius) {
+//			x+=enemySpeed;
+//		}
+//		}
+//		
+//	
+//		else if(Math.abs(p.ptruex-trueX)<Math.abs(p.ptruey-trueY)){
+//		if(y>p.y-radius) {
+//			y-=enemySpeed;
+//		}
+//		if(y<p.y-radius) {
+//			y+=enemySpeed;
+//		}
+//		}
+//		
 		
 	
 		}
