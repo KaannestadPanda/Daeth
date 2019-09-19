@@ -11,14 +11,15 @@ public class GammeObject {
     int width;
     int height;
     CollisionCircle collisionBox;
-    int radius=width/2;
+    int radius;
 
 GammeObject(int newX, int newY, int newWidth, int newHeight){
 	x=newX;
 	y=newY;
 	width=newWidth;
 	height=newHeight;
-	collisionBox=new CollisionCircle(x,y,width);
+	collisionBox=new CollisionCircle(x,y,radius);
+	radius=width/2;
 }
 
 void update() {

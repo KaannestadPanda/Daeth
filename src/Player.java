@@ -17,8 +17,8 @@ public class Player extends GammeObject{
 	void update() {
 		
 		super.update();
-		ptruex=x+5;
-		ptruey=y+5;
+		ptruex=x+radius;
+		ptruey=y+radius;
 	
 	
 	
