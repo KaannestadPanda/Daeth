@@ -23,110 +23,35 @@ public class Enemy extends GammeObject {
 
 		if (warningg == false) {
 
-			int trueX = x + radius;
-			int trueY = y + radius;
+			
 
-			if (collisionBox.intersectsCircle(p.collisionBox)) {
-				x = p.x;
-				y = p.y;
+			if (collisionBox.intersectsCircle(p.collisionBox)==true) {
+				//x = p.x;
+				//y = p.y;
+				x=p.trueX-radius;
+				y=p.trueY-radius;
 
 				p.isAlive = false;
 				
 			}
 
-			if (Math.abs(trueX - p.ptruex) <= enemySpeed) {
+			if (Math.abs(trueX - p.trueX) <= enemySpeed) {
 
-			} else if (trueX > p.ptruex) {
+			} else if (trueX > p.trueX) {
 				x -= enemySpeed;
-			} else if (trueX < p.ptruex) {
+			} else if (trueX < p.trueX) {
 				x += enemySpeed;
 			}
 
-			if (Math.abs(trueY - p.ptruey) <= enemySpeed) {
+			if (Math.abs(trueY - p.trueY) <= enemySpeed) {
 
-			} else if (trueY > p.ptruey) {
+			} else if (trueY > p.trueY) {
 				y -= enemySpeed;
-			} else if (trueY < p.ptruey) {
+			} else if (trueY < p.trueY) {
 				y += enemySpeed;
 			}
 
-//		if(Math.abs(p.ptruex-trueX)<=enemySpeed&&Math.abs(p.ptruey-trueY)<=enemySpeed) {
-//			if(x>p.x-radius) {
-//				x-=enemySpeed;
-//			}
-//			if(x<p.x-radius) {
-//				x+=enemySpeed;
-//		}
-//			if(y>p.y-radius) {
-//				y-=enemySpeed;
-//			}
-//			if(y<p.y-radius) {
-//				y+=enemySpeed;
-//			}
-//		}
-//		
-//		else if(Math.abs(p.ptruex-trueX)>Math.abs(p.ptruey-trueY)) {
-//		if(x>p.x-radius) {
-//			x-=enemySpeed;
-//		}
-//		if(x<p.x-radius) {
-//			x+=enemySpeed;
-//		}
-//		}
-//		
-//	
-//		//else if(Math.abs(p.ptruex-trueX)<Math.abs(p.ptruey-trueY)){
-//		//if(y>p.y-radius) {
-//		//	y-=enemySpeed;
-//	//	}
-//		//if(y<p.y-radius) {
-//		//	y+=enemySpeed;
-//		//}
-//		//}
 
-//		if(Math.abs(p.ptruex-trueX)<enemySpeed&&Math.abs(p.ptruey-trueY)<enemySpeed) {
-//			x=p.x;
-//			y=p.y;
-//			
-//			//p.isAlive=false;
-//		}
-//
-//		
-//		
-//		if(Math.abs(Math.abs(p.ptruex-trueX)-Math.abs(p.ptruey-trueY))<=enemySpeed) {
-//			if(x>p.x-radius) {
-//				x-=enemySpeed;
-//			}
-//			if(x<p.x-radius) {
-//				x+=enemySpeed;
-//		}
-//			if(y>p.y-radius) {
-//				y-=enemySpeed;
-//			}
-//			if(y<p.y-radius) {
-//				y+=enemySpeed;
-//			}
-//		}
-//		
-//		else if(Math.abs(p.ptruex-trueX)>Math.abs(p.ptruey-trueY)) {
-//		if(x>p.x-radius) {
-//			x-=enemySpeed;
-//		}
-//		if(x<p.x-radius) {
-//			x+=enemySpeed;
-//		}
-//		}
-//		
-//	
-//		else if(Math.abs(p.ptruex-trueX)<Math.abs(p.ptruey-trueY)){
-//		if(y>p.y-radius) {
-//			y-=enemySpeed;
-//		}
-//		if(y<p.y-radius) {
-//			y+=enemySpeed;
-//		}
-//		}
-//		
 
 		} else {
 			if (System.currentTimeMillis() > startTime + duration) {
@@ -145,6 +70,7 @@ public class Enemy extends GammeObject {
 			g.fillOval(x, y, width, height);
 			g.setColor(Color.BLACK);
 			g.drawOval(x, y, width, height);
+			g.drawOval(x, y, 5, 5);
 		} else {
 			g.setColor(Color.ORANGE);
 			g.fillOval(x, y, width, height);

@@ -12,18 +12,24 @@ public class GammeObject {
     int height;
     CollisionCircle collisionBox;
     int radius;
+    int trueX;
+    int trueY;
 
 GammeObject(int newX, int newY, int newWidth, int newHeight){
 	x=newX;
 	y=newY;
 	width=newWidth;
 	height=newHeight;
-	collisionBox=new CollisionCircle(x,y,radius);
 	radius=width/2;
+	collisionBox=new CollisionCircle(x,y,radius);
+	trueX=x+radius;
+	trueY=y+radius;
 }
 
 void update() {
-	collisionBox.setBounds(x+radius, y+radius);
+	trueX=x+radius;
+	trueY=y+radius;
+	collisionBox.setBounds(trueX, trueY);
 	
 }
 

@@ -14,7 +14,7 @@ public class ObbjectManager implements ActionListener {
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
 
-	PowerUp power= new PowerUp(0,0,20,20);
+	PowerUp power;
 	
 	int rand;
 
@@ -50,6 +50,7 @@ public class ObbjectManager implements ActionListener {
 
 	ObbjectManager(Player z) {
 		play = z;
+		power= new PowerUp(0,0,20,20);
 	}
 
 	void update() {
@@ -60,7 +61,7 @@ public class ObbjectManager implements ActionListener {
 		}
 
 		play.update();
-		power.update();
+		power.update(play);
 		for (int i = zergs.size() - 1; i >= 0; i--) {
 			zergs.get(i).update(play);
 
@@ -108,7 +109,7 @@ public class ObbjectManager implements ActionListener {
 		} else {
 			life--;
 			if (life <= 0) {
-				//play.isAlive=false;
+				play.isAlive=false;
 			}
 		}
 
@@ -206,16 +207,16 @@ public class ObbjectManager implements ActionListener {
 	
 	void powerUpCall() {
 		if(seconds%30==0) {
-			int powerX=ranX.nextInt(1911);
-		int powerY=ranY.nextInt(901);	
+		int powerX=ranX.nextInt(1911);
+		int powerY=ranY.nextInt(901);
 		
 		power.x=powerX;
 		power.y=powerY;
-		power.isAlive=true;
+		power.available=true;
 		}
 		
 		if((seconds-6)%30==0) {
-			power.isAlive=false;
+			power.available=false;
 		}
 		
 		

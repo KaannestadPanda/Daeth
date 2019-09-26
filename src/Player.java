@@ -7,8 +7,7 @@ public class Player extends GammeObject{
 
 	int powerUpCount=0;
 	int speed;
-	int ptruex;
-	int ptruey;
+	
 	Player(int newX, int newY, int newWidth, int newHeight) {
 		super(newX, newY, newWidth, newHeight);
 		speed = 5;
@@ -17,8 +16,7 @@ public class Player extends GammeObject{
 	void update() {
 		
 		super.update();
-		ptruex=x+radius;
-		ptruey=y+radius;
+		
 	
 	
 	
