@@ -12,7 +12,7 @@ public class PowerUp extends GammeObject {
 	boolean available = false;
 
 	void update(Player p) {
-		System.out.println("yy");
+		
 		super.update();
 
 		if (available) {

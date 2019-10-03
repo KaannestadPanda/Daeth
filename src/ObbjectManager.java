@@ -13,6 +13,7 @@ public class ObbjectManager implements ActionListener {
 
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
+	int freezeTime=10;
 
 	PowerUp power;
 	
@@ -66,15 +67,33 @@ public class ObbjectManager implements ActionListener {
 			zergs.get(i).update(play);
 
 		}
+		
+		
 
 	}
 
 	void draw(Graphics g) {
 		
+//		if(freezeTime==1) {
+//			g.setColor(Color.GREEN);
+//		}
+//		else if(freezeTime==2) {
+//			g.setColor(Color.YELLOW);
+//		}
+//		else if(freezeTime==3) {
+//			g.setColor(Color.ORANGE);
+//		}
+//		else if(freezeTime==4) {
+//			g.setColor(Color.RED);
+//		}
+//		else {g.setColor(Color.WHITE);}
+//		
+//		g.fillRect(-10, -10, 2000, 1500);
+		
 		for(int i=0;i<play.powerUpCount;i++) {
-			int ycoord=i*50;
-			g.setColor(Color.CYAN);
-			g.fillOval(50,ycoord,20,20);
+			int ycoord=i*25;
+			g.setColor(Color.BLUE);
+			g.fillOval(13,ycoord,10,10);
 		}
 
 		if (life < 100) {
@@ -109,7 +128,7 @@ public class ObbjectManager implements ActionListener {
 		} else {
 			life--;
 			if (life <= 0) {
-				play.isAlive=false;
+				//play.isAlive=false;
 			}
 		}
 
@@ -221,11 +240,33 @@ public class ObbjectManager implements ActionListener {
 		
 		
 	}
+	
+	void activatePower() {
+		if(play.powerUpCount>0) {
+			
+			for (int i = zergs.size() - 1; i >= 0; i--) {
+				zergs.get(i).frozen=true;
+			}
+			freezeTime=0;
+			play.powerUpCount--;
+			
+		}
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		seconds++;
+		freezeTime++;
+		
+		if(freezeTime>4) {
+			for (int i = zergs.size() - 1; i >= 0; i--) {
+				zergs.get(i).frozen=false;
+			}
+
+		}
+		
 		powerUpCall();
 		for(int i=0;i<phaseCount;i++) {
 		timeDoStuff();

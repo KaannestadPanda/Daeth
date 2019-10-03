@@ -80,10 +80,6 @@ void updateEndState() {
 
 	}
 void updateMenuState() {
-	//if(clicky.clicked==true) {
-	//	currentState=GAME_STATE;
-	//	clicky.clicked=false;
-	//}
 	
 }
 	void updateGameState() {
@@ -143,7 +139,9 @@ void drawMenuState(Graphics g) {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		
+		if(e.getKeyCode()==32) {
+			manager.activatePower();
+		}
 			 
 			 
 		 
@@ -171,10 +169,6 @@ void drawMenuState(Graphics g) {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(currentState==GAME_STATE) {
-		System.out.println(e.getX()+", "+e.getY());
-		}
-		
 	}
 
 	@Override

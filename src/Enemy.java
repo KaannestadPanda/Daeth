@@ -7,6 +7,7 @@ public class Enemy extends GammeObject {
 	boolean warningg = true;
 	long startTime;
 	long duration;
+	boolean frozen=false;
 
 	Enemy(int newX, int newY, int newWidth, int newHeight, int speed) {
 		super(newX, newY, newWidth, newHeight);
@@ -26,14 +27,14 @@ public class Enemy extends GammeObject {
 			
 
 			if (collisionBox.intersectsCircle(p.collisionBox)==true) {
-				//x = p.x;
-				//y = p.y;
 				x=p.trueX-radius;
 				y=p.trueY-radius;
 
-				p.isAlive = false;
+				//p.isAlive = false;
 				
 			}
+			
+			if(frozen==false) {
 
 			if (Math.abs(trueX - p.trueX) <= enemySpeed) {
 
@@ -50,6 +51,8 @@ public class Enemy extends GammeObject {
 			} else if (trueY < p.trueY) {
 				y += enemySpeed;
 			}
+			
+			}
 
 
 
@@ -64,13 +67,17 @@ public class Enemy extends GammeObject {
 	void draw(Graphics g) {
 
 		if (warningg == false) {
-			// g.setColor(Color.BLACK);
-			// g.drawRect(x,y,width,height);
-			g.setColor(Color.RED);
-			g.fillOval(x, y, width, height);
-			g.setColor(Color.BLACK);
-			g.drawOval(x, y, width, height);
-			g.drawOval(x, y, 5, 5);
+			
+			
+			if(frozen==true) {
+				g.setColor(Color.CYAN);
+		}
+			else {
+				g.setColor(Color.RED);
+			}
+			
+			g.fillOval(x, y, width, height);	
+			
 		} else {
 			g.setColor(Color.ORANGE);
 			g.fillOval(x, y, width, height);
