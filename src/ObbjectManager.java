@@ -13,7 +13,7 @@ public class ObbjectManager implements ActionListener {
 
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
-	int freezeTime=10;
+	boolean enemiesFrozen=false;
 
 	PowerUp power;
 	
@@ -41,6 +41,8 @@ public class ObbjectManager implements ActionListener {
 	ArrayList<Enemy> zergs = new ArrayList<Enemy>();
 
 	int life = 500;
+	int freezeGraphicY = 230;
+	double freezeGraphicHeight=600;
 	
 	Rectangle r = new Rectangle(860, 450, 100, 100);
 	
@@ -68,27 +70,36 @@ public class ObbjectManager implements ActionListener {
 
 		}
 		
+		if(enemiesFrozen==false) {
+			for (int i = zergs.size() - 1; i >= 0; i--) {
+				zergs.get(i).frozen=false;
+			}
+
+		}
 		
 
 	}
 
 	void draw(Graphics g) {
+	
+		if(enemiesFrozen) {
+			
+			int redVal=(int) ((600/2.5)-(freezeGraphicHeight/2.5));
+
+Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),100);
+		g.setColor(timerColor);
+		g.fillRect(1850, freezeGraphicY, 160, (int) freezeGraphicHeight);
+		freezeGraphicHeight-=2.5;
+		freezeGraphicY++;
+		if(freezeGraphicHeight<=0) {
+			enemiesFrozen=false;
+			freezeGraphicY = 230;
+			freezeGraphicHeight=600;
+		}
 		
-//		if(freezeTime==1) {
-//			g.setColor(Color.GREEN);
-//		}
-//		else if(freezeTime==2) {
-//			g.setColor(Color.YELLOW);
-//		}
-//		else if(freezeTime==3) {
-//			g.setColor(Color.ORANGE);
-//		}
-//		else if(freezeTime==4) {
-//			g.setColor(Color.RED);
-//		}
-//		else {g.setColor(Color.WHITE);}
-//		
-//		g.fillRect(-10, -10, 2000, 1500);
+		}
+		
+		
 		
 		for(int i=0;i<play.powerUpCount;i++) {
 			int ycoord=i*25;
@@ -247,8 +258,8 @@ public class ObbjectManager implements ActionListener {
 			for (int i = zergs.size() - 1; i >= 0; i--) {
 				zergs.get(i).frozen=true;
 			}
-			freezeTime=0;
-			play.powerUpCount--;
+			enemiesFrozen=true;
+			//play.powerUpCount--;
 			
 		}
 	}
@@ -258,14 +269,9 @@ public class ObbjectManager implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		seconds++;
-		freezeTime++;
 		
-		if(freezeTime>4) {
-			for (int i = zergs.size() - 1; i >= 0; i--) {
-				zergs.get(i).frozen=false;
-			}
-
-		}
+		
+		
 		
 		powerUpCall();
 		for(int i=0;i<phaseCount;i++) {

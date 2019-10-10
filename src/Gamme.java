@@ -169,6 +169,8 @@ void drawMenuState(Graphics g) {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println(e.getX());
+		System.out.println(e.getY());
 	}
 
 	@Override
