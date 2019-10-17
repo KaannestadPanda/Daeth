@@ -3,7 +3,6 @@ import java.awt.Graphics;
 
 public class Enemy extends GammeObject {
 	int enemySpeed = 0;
-	int diagonalSpeed = 3;
 	boolean warningg = true;
 	long startTime;
 	long duration;
@@ -57,15 +56,31 @@ public class Enemy extends GammeObject {
 
 
 		} else {
+			if(frozen==false) {
 			if (System.currentTimeMillis() > startTime + duration) {
 				warningg = false;
 			}
+			}
+			
 		}
 
 	}
 
 	void draw(Graphics g) {
 
+//		if(warningg&&frozen) {
+//			g.setColor(Color.CYAN);
+//		}
+//		else if(warningg) {
+//			g.setColor(Color.ORANGE);
+//		}
+//		else if(frozen){
+//			g.setColor(Color.CYAN);
+//		}
+//		else {
+//			g.setColor(Color.RED);
+//		}
+//		g.fillOval(x, y, width, height);	
 		if (warningg == false) {
 			
 			

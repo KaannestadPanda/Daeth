@@ -14,6 +14,8 @@ public class ObbjectManager implements ActionListener {
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
 	boolean enemiesFrozen=false;
+	long duration=4000;
+	long startTime;
 
 	PowerUp power;
 	
@@ -84,9 +86,10 @@ public class ObbjectManager implements ActionListener {
 	
 		if(enemiesFrozen) {
 			
-			int redVal=(int) ((600/2.5)-(freezeGraphicHeight/2.5));
+			//int redVal=(int) ((240)-(freezeGraphicHeight/2.5));
+			int redVal=(int) ((190)-(freezeGraphicHeight/2.5)+60);
 
-Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),100);
+Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		g.setColor(timerColor);
 		g.fillRect(1850, freezeGraphicY, 160, (int) freezeGraphicHeight);
 		freezeGraphicHeight-=2.5;
@@ -117,6 +120,8 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),100);
 			g.setColor(Color.GREEN);
 		}
 		g.fillRect(660, 930, life, 30);
+		g.setColor(Color.BLACK);
+		g.drawRect(660, 930, 500, 30);
 
 		if (seconds % 60 == 0 && updatedPhaseCount == false) {
 			phaseCount++;
@@ -237,6 +242,7 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),100);
 	
 	void powerUpCall() {
 		if(seconds%30==0) {
+			startTime=System.currentTimeMillis();
 		int powerX=ranX.nextInt(1911);
 		int powerY=ranY.nextInt(901);
 		
@@ -245,21 +251,21 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),100);
 		power.available=true;
 		}
 		
-		if((seconds-6)%30==0) {
-			power.available=false;
+		if (System.currentTimeMillis() > startTime + duration) {
+					power.available=false;
 		}
 		
 		
 	}
 	
 	void activatePower() {
-		if(play.powerUpCount>0) {
+		if(play.powerUpCount>0&&enemiesFrozen==false) {
 			
 			for (int i = zergs.size() - 1; i >= 0; i--) {
 				zergs.get(i).frozen=true;
 			}
 			enemiesFrozen=true;
-			//play.powerUpCount--;
+			play.powerUpCount--;
 			
 		}
 	}
@@ -268,8 +274,9 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),100);
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(enemiesFrozen==false) {
 		seconds++;
-		
+		}
 		
 		
 		
