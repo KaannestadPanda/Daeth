@@ -68,35 +68,35 @@ public class Enemy extends GammeObject {
 
 	void draw(Graphics g) {
 
-//		if(warningg&&frozen) {
-//			g.setColor(Color.CYAN);
-//		}
-//		else if(warningg) {
-//			g.setColor(Color.ORANGE);
-//		}
-//		else if(frozen){
-//			g.setColor(Color.CYAN);
-//		}
-//		else {
-//			g.setColor(Color.RED);
-//		}
-//		g.fillOval(x, y, width, height);	
-		if (warningg == false) {
-			
-			
-			if(frozen==true) {
-				g.setColor(Color.CYAN);
+		if(warningg&&frozen) {
+			g.setColor(Color.CYAN);
 		}
-			else {
-				g.setColor(Color.RED);
-			}
-			
-			g.fillOval(x, y, width, height);	
-			
-		} else {
+		else if(warningg) {
 			g.setColor(Color.ORANGE);
-			g.fillOval(x, y, width, height);
 		}
+		else if(frozen){
+			g.setColor(Color.CYAN);
+		}
+		else {
+			g.setColor(Color.RED);
+		}
+		g.fillOval(x, y, width, height);	
+//		if (warningg == false) {
+//			
+//			
+//			if(frozen==true) {
+//				g.setColor(Color.CYAN);
+//		}
+//			else {
+//				g.setColor(Color.RED);
+//			}
+//			
+//			g.fillOval(x, y, width, height);	
+//			
+//		} else {
+//			g.setColor(Color.ORANGE);
+//			g.fillOval(x, y, width, height);
+//		}
 
 	}
 
