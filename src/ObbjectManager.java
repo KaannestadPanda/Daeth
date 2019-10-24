@@ -87,7 +87,7 @@ public class ObbjectManager implements ActionListener {
 		if(enemiesFrozen) {
 			
 			//int redVal=(int) ((240)-(freezeGraphicHeight/2.5));
-			int redVal=(int) ((190)-(freezeGraphicHeight/2.5)+60);
+			int redVal=(int) ((250)-(freezeGraphicHeight/2.5));
 
 Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		g.setColor(timerColor);
@@ -123,12 +123,12 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		g.setColor(Color.BLACK);
 		g.drawRect(660, 930, 500, 30);
 
-		if (seconds % 60 == 0 && updatedPhaseCount == false) {
+		if (seconds % 30 == 0 && updatedPhaseCount == false) {
 			phaseCount++;
 			updatedPhaseCount = true;
 		}
 
-		if ((seconds - 1) % 60 == 0) {
+		if ((seconds - 1) % 30 == 0) {
 			updatedPhaseCount = false;
 		}
 
@@ -238,10 +238,12 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 			
 		}
 
+		
+		
 	}
 	
 	void powerUpCall() {
-		if(seconds%30==0) {
+		if(seconds!=0&&seconds%30==0&&enemiesFrozen==false) {
 			startTime=System.currentTimeMillis();
 		int powerX=ranX.nextInt(1911);
 		int powerY=ranY.nextInt(901);
@@ -276,13 +278,17 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		// TODO Auto-generated method stub
 		if(enemiesFrozen==false) {
 		seconds++;
+		powerUpCall();
 		}
 		
 		
 		
 		powerUpCall();
+		
 		for(int i=0;i<phaseCount;i++) {
+			if(enemiesFrozen==false) {
 		timeDoStuff();
+			}
 		}
 
 	}

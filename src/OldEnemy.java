@@ -1,19 +1,17 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Enemy extends GammeObject {
+public class OldEnemy extends GammeObject {
 	int enemySpeed = 0;
-	int movingSpeed;
 	boolean warningg = true;
 	long startTime;
 	long duration;
 	boolean frozen=false;
 
-	Enemy(int newX, int newY, int newWidth, int newHeight, int speed) {
+	OldEnemy(int newX, int newY, int newWidth, int newHeight, int speed) {
 		super(newX, newY, newWidth, newHeight);
 		// TODO Auto-generated constructor stub
 		enemySpeed = speed += 2;
-		movingSpeed = speed +=2;
 		duration = 1000;
 		startTime = System.currentTimeMillis();
 
@@ -22,14 +20,6 @@ public class Enemy extends GammeObject {
 	void update(Player p) {
 
 		super.update();
-		
-		if(frozen) {
-			enemySpeed=0;
-		}
-		else {
-			enemySpeed=movingSpeed;
-		}
-		
 
 		if (warningg == false) {
 
@@ -66,11 +56,11 @@ public class Enemy extends GammeObject {
 
 
 		} else {
-			
+			if(frozen==false) {
 			if (System.currentTimeMillis() > startTime + duration) {
 				warningg = false;
 			}
-			
+			}
 			
 		}
 
@@ -79,7 +69,7 @@ public class Enemy extends GammeObject {
 	void draw(Graphics g) {
 
 		if(warningg&&frozen) {
-			g.setColor(Color.ORANGE);
+			g.setColor(Color.CYAN);
 		}
 		else if(warningg) {
 			g.setColor(Color.ORANGE);
@@ -91,7 +81,22 @@ public class Enemy extends GammeObject {
 			g.setColor(Color.RED);
 		}
 		g.fillOval(x, y, width, height);	
-
+//		if (warningg == false) {
+//			
+//			
+//			if(frozen==true) {
+//				g.setColor(Color.CYAN);
+//		}
+//			else {
+//				g.setColor(Color.RED);
+//			}
+//			
+//			g.fillOval(x, y, width, height);	
+//			
+//		} else {
+//			g.setColor(Color.ORANGE);
+//			g.fillOval(x, y, width, height);
+//		}
 
 	}
 
