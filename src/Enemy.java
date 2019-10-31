@@ -12,8 +12,8 @@ public class Enemy extends GammeObject {
 	Enemy(int newX, int newY, int newWidth, int newHeight, int speed) {
 		super(newX, newY, newWidth, newHeight);
 		// TODO Auto-generated constructor stub
-		enemySpeed = speed += 2;
-		movingSpeed = speed +=2;
+		enemySpeed = speed;
+		movingSpeed = speed;
 		duration = 1000;
 		startTime = System.currentTimeMillis();
 
@@ -39,7 +39,7 @@ public class Enemy extends GammeObject {
 				x=p.trueX-radius;
 				y=p.trueY-radius;
 
-				//p.isAlive = false;
+				p.isAlive = false;
 				
 			}
 			

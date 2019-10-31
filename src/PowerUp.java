@@ -21,6 +21,7 @@ public class PowerUp extends GammeObject {
 				
 				p.powerUpCount++;
 				available = false;
+				p.score+=20;
 			}
 
 		}

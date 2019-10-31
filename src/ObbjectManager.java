@@ -11,12 +11,15 @@ import javax.swing.JTextField;
 
 public class ObbjectManager implements ActionListener {
 
+	int secondsScore=0;
+	int overallScore;
 	int phaseCount = 0;
 	boolean updatedPhaseCount = false;
 	boolean enemiesFrozen=false;
 	long duration=4000;
 	long startTime;
 
+	Color silver=new Color(227,227,227);
 	PowerUp power;
 	
 	int rand;
@@ -55,7 +58,7 @@ public class ObbjectManager implements ActionListener {
 
 	ObbjectManager(Player z) {
 		play = z;
-		power= new PowerUp(0,0,20,20);
+		power= new PowerUp(0,0,80,80);
 	}
 
 	void update() {
@@ -65,6 +68,7 @@ public class ObbjectManager implements ActionListener {
 			Gamme.alreadyRan = false;
 		}
 
+		overallScore=play.score+secondsScore;
 		play.update();
 		power.update(play);
 		for (int i = zergs.size() - 1; i >= 0; i--) {
@@ -79,6 +83,7 @@ public class ObbjectManager implements ActionListener {
 
 		}
 		
+		
 
 	}
 
@@ -86,7 +91,7 @@ public class ObbjectManager implements ActionListener {
 	
 		if(enemiesFrozen) {
 			
-			//int redVal=(int) ((240)-(freezeGraphicHeight/2.5));
+			
 			int redVal=(int) ((250)-(freezeGraphicHeight/2.5));
 
 Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
@@ -104,8 +109,8 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		
 		
 		
-		for(int i=0;i<play.powerUpCount;i++) {
-			int ycoord=i*25;
+		for(int i=40;(i-39)<play.powerUpCount;i++) {
+			int ycoord=(i-39)*25;
 			g.setColor(Color.BLUE);
 			g.fillOval(13,ycoord,10,10);
 		}
@@ -116,8 +121,11 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 			g.setColor(Color.ORANGE);
 		} else if (life < 300) {
 			g.setColor(Color.YELLOW);
-		} else {
+		} else if(life<475){
 			g.setColor(Color.GREEN);
+		}
+		else {
+			g.setColor(silver);
 		}
 		g.fillRect(660, 930, life, 30);
 		g.setColor(Color.BLACK);
@@ -140,11 +148,14 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 			zergs.get(i).draw(g);
 		}
 		if (play.x>=860&&play.x<=960&&play.y>=450&&play.y<=550) {
+			if(life>300&&life<475) {
+				play.score+=30;
+			}
 			life = 500;
 		} else {
 			life--;
 			if (life <= 0) {
-				//play.isAlive=false;
+				play.isAlive=false;
 			}
 		}
 
@@ -153,7 +164,7 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		
 		
 		g.drawString("powerups:" +play.powerUpCount+ "  phase:" +phaseCount + "  seconds:" + seconds, 10, 10);
-
+g.drawString("score: "+overallScore, 800, 10);
 	}
 
 	void addEnemy(Enemy e) {
@@ -243,7 +254,7 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 	}
 	
 	void powerUpCall() {
-		if(seconds!=0&&seconds%30==0&&enemiesFrozen==false) {
+		if(seconds!=0&&seconds%15==0&&enemiesFrozen==false) {
 			startTime=System.currentTimeMillis();
 		int powerX=ranX.nextInt(1911);
 		int powerY=ranY.nextInt(901);
@@ -261,7 +272,7 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 	}
 	
 	void activatePower() {
-		if(play.powerUpCount>0&&enemiesFrozen==false) {
+		if(play.powerUpCount>0&&enemiesFrozen==false&&seconds>=1) {
 			
 			for (int i = zergs.size() - 1; i >= 0; i--) {
 				zergs.get(i).frozen=true;
@@ -278,7 +289,8 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		// TODO Auto-generated method stub
 		if(enemiesFrozen==false) {
 		seconds++;
-		powerUpCall();
+		secondsScore+=5;
+		//powerUpCall();
 		}
 		
 		

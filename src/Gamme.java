@@ -111,13 +111,14 @@ void drawMenuState(Graphics g) {
 	g.setColor(Color.BLACK);
 	g.setFont(titleFont);
 	
-	g.drawString("How to play: Your character will follow your mouse.  Use your mouse to dodge the red dots, which will follow you.", 430, 100);
-	g.drawString("Every six seconds, a orange warning dot will appear, and a second later an enemy will spawn there.", 500, 150);
-	g.drawString("Every thirty seconds, a blue dot will appear.  Touch this to collect a power up.  Your number of power ups is indicated in the top left.",330,200);
+	g.drawString("How to play: Your character will follow your mouse.  Use your mouse to dodge the red dots, which will follow you.", 400, 100);
+	g.drawString("Every six seconds, a orange warning dot will appear, and a second later an enemy will spawn there.", 460, 150);
+	g.drawString("Every fifteen seconds, a blue dot will appear.  Touch this to collect a power up.  Your number of power ups is indicated in the top left.",330,200);
 	g.drawString("Press space to use one power up and freeze all enemies for four seconds.  Frozen enemies will still kill you if you touch them.", 355, 250);
 	g.drawString("You lose if a red dot touches you or if the timer on the bottom of the screen runs out.", 520, 300);
 	g.drawString("Reset the timer by touching the blue square in the middle of the screen.", 600, 350);
-	g.drawString("GET READY TO RUN", 800, 400);
+	g.drawString("Press the pink button to begin.  You will have four seconds before the game begins.", 550, 400);
+	g.drawString("GET READY TO RUN", 810, 600);
 	
 	clicky.draw(g);
 	
@@ -146,9 +147,7 @@ void drawMenuState(Graphics g) {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		if(e.getKeyCode()==32) {
-			manager.activatePower();
-		}
+		
 			 
 			 
 		 
@@ -176,8 +175,9 @@ void drawMenuState(Graphics g) {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getX());
-		System.out.println(e.getY());
+		//System.out.println(e.getX());
+		//System.out.println(e.getY());
+		
 	}
 
 	@Override
@@ -185,6 +185,9 @@ void drawMenuState(Graphics g) {
 		// TODO Auto-generated method stub
 		clickedX=e.getX();
 		clickedY=e.getY()-24;
+		if(currentState==GAME_STATE) {
+			manager.activatePower();
+		}
 		
 		if(currentState==MENU_STATE&&clicky.checkClicked(clickedX, clickedY)) {
 			manager.seconds=0;

@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 public class Player extends GammeObject{
 
+	int score = 0;
 	int powerUpCount=10;
 	int speed;
 	
