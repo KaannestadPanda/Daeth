@@ -109,8 +109,8 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		
 		
 		
-		for(int i=40;(i-39)<play.powerUpCount;i++) {
-			int ycoord=(i-39)*25;
+		for(int i=1;(i-1)<play.powerUpCount;i++) {
+			int ycoord=(i)*25;
 			g.setColor(Color.BLUE);
 			g.fillOval(13,ycoord,10,10);
 		}

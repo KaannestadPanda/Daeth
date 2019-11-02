@@ -8,8 +8,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -18,6 +21,8 @@ import javax.swing.Timer;
 public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMotionListener,  MouseListener{
 
 	static Player player=new Player(500,500,10,10);
+	
+	public static BufferedImage diabloImg;
 	
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -37,8 +42,14 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	Gamme(){
 		timer = new Timer(1000/60,this);
 		
-	   
+	   try {
+		diabloImg=ImageIO.read(this.getClass().getResourceAsStream("DIABLO.png"));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
+	   
 	}
 	
 	void startGame() {
@@ -98,6 +109,7 @@ void updateMenuState() {
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
 		g.drawString("YOU HAVE LOST, PRESS THE BUTTON TO TRY AGAIN", 100, 100);
+		g.drawString("YOUR SCORE: "+manager.overallScore, 100, 140);
 		clicky.draw(g);
 	}
 	
@@ -112,14 +124,14 @@ void drawMenuState(Graphics g) {
 	g.setFont(titleFont);
 	
 	g.drawString("How to play: Your character will follow your mouse.  Use your mouse to dodge the red dots, which will follow you.", 400, 100);
-	g.drawString("Every six seconds, a orange warning dot will appear, and a second later an enemy will spawn there.", 460, 150);
+	g.drawString("Every six seconds, an orange warning dot will appear, and a second later an enemy will spawn there.", 460, 150);
 	g.drawString("Every fifteen seconds, a blue dot will appear.  Touch this to collect a power up.  Your number of power ups is indicated in the top left.",330,200);
-	g.drawString("Press space to use one power up and freeze all enemies for four seconds.  Frozen enemies will still kill you if you touch them.", 355, 250);
+	g.drawString("Click the mouse to use one power up and freeze all enemies for four seconds.  Frozen enemies will still kill you if you touch them.", 355, 250);
 	g.drawString("You lose if a red dot touches you or if the timer on the bottom of the screen runs out.", 520, 300);
 	g.drawString("Reset the timer by touching the blue square in the middle of the screen.", 600, 350);
 	g.drawString("Press the pink button to begin.  You will have four seconds before the game begins.", 550, 400);
-	g.drawString("GET READY TO RUN", 810, 600);
-	
+	g.drawString("GET READY TO RUN", 810, 700);
+	g.drawString("You get score per second, per power up collected, and for resetting your timer while the timer is in the green.", 420,600);
 	clicky.draw(g);
 	
 	

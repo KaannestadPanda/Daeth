@@ -5,8 +5,9 @@ import java.awt.event.MouseListener;
 
 public class Player extends GammeObject{
 
+	
 	int score = 0;
-	int powerUpCount=10;
+	int powerUpCount=1;
 	int speed;
 	
 	Player(int newX, int newY, int newWidth, int newHeight) {
@@ -26,8 +27,9 @@ public class Player extends GammeObject{
 	
 	
 	void draw(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.drawOval(x, y, width, height);
+		g.drawImage(Gamme.diabloImg,(x-(1/2*width)),(y-(1/2*height)),width,height,null);
+		//g.setColor(Color.BLACK);
+		//g.drawOval(x, y, width, height);
 		
 	}
 
