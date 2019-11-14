@@ -27,6 +27,7 @@ public class Player extends GammeObject{
 	
 	
 	void draw(Graphics g) {
+		
 		g.drawImage(Gamme.diabloImg,(x-(1/2*width)),(y-(1/2*height)),width,height,null);
 		//g.setColor(Color.BLACK);
 		//g.drawOval(x, y, width, height);

@@ -31,6 +31,11 @@ public class CollisionCircle {
 		
 	}
 	
+	boolean intersectsSquare(Buttonn b) {
+		return false;
+		
+	}
+	
 	void setBounds(int xx, int yy) {
 		
 		

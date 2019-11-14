@@ -147,7 +147,7 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		for (int i = zergs.size() - 1; i >= 0; i--) {
 			zergs.get(i).draw(g);
 		}
-		if (play.x>=860&&play.x<=960&&play.y>=450&&play.y<=550) {
+		if (play.x>=850&&play.x<=970&&play.y>=440&&play.y<=560) {
 			if(life>300&&life<475) {
 				play.score+=30;
 			}

@@ -20,7 +20,7 @@ import javax.swing.Timer;
 
 public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMotionListener,  MouseListener{
 
-	static Player player=new Player(500,500,10,10);
+	static Player player=new Player(500,500,20,20);
 	
 	public static BufferedImage diabloImg;
 	
@@ -208,7 +208,7 @@ void drawMenuState(Graphics g) {
 		}
 		
 		if(currentState==END_STATE&&clicky.checkClicked(clickedX, clickedY)) {
-			player=new Player(500,500,10,10);
+			player=new Player(500,500,20,20);
 			 manager=new ObbjectManager(player);
 			 currentState=0;
 			
