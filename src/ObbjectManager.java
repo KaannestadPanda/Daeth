@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -112,7 +113,7 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		for(int i=1;(i-1)<play.powerUpCount;i++) {
 			int ycoord=(i)*25;
 			g.setColor(Color.BLUE);
-			g.fillOval(13,ycoord,10,10);
+			g.fillOval(13,ycoord+60,10,10);
 		}
 
 		if (life < 100) {
@@ -147,7 +148,10 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		for (int i = zergs.size() - 1; i >= 0; i--) {
 			zergs.get(i).draw(g);
 		}
-		if (play.x>=850&&play.x<=970&&play.y>=440&&play.y<=560) {
+		//g.fillOval(play.x, play.y, 2, 2);
+		//g.fillOval(play.x, play.y, 100, 100);
+		
+		if (play.x>=(860-play.width)&&play.x<=(960)&&play.y>=(450-play.width)&&play.y<=(550)) {
 			if(life>300&&life<475) {
 				play.score+=30;
 			}
@@ -162,9 +166,9 @@ Color timerColor=new Color(redVal,(int) (freezeGraphicHeight/2.5),0);
 		g.setColor(Color.BLACK);
 
 		
-		
-		g.drawString("powerups:" +play.powerUpCount+ "  phase:" +phaseCount + "  seconds:" + seconds, 10, 10);
-g.drawString("score: "+overallScore, 800, 10);
+		g.setFont(new Font("Arial",Font.PLAIN,40));
+		g.drawString("powerups:" +play.powerUpCount+ "  phase:" +phaseCount + "  seconds:" + seconds, 10, 40);
+g.drawString("score: "+overallScore, 800, 40);
 	}
 
 	void addEnemy(Enemy e) {
@@ -289,8 +293,10 @@ g.drawString("score: "+overallScore, 800, 10);
 		// TODO Auto-generated method stub
 		if(enemiesFrozen==false) {
 		seconds++;
-		secondsScore+=5;
-		//powerUpCall();
+		
+		int scorePerSecond=phaseCount*5;
+		secondsScore+=scorePerSecond;
+		
 		}
 		
 		

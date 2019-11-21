@@ -20,7 +20,7 @@ import javax.swing.Timer;
 
 public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMotionListener,  MouseListener{
 
-	static Player player=new Player(500,500,20,20);
+	static Player player=new Player(500,500,30,30);
 	
 	public static BufferedImage diabloImg;
 	
@@ -110,6 +110,7 @@ void updateMenuState() {
 		g.setFont(titleFont);
 		g.drawString("YOU HAVE LOST, PRESS THE BUTTON TO TRY AGAIN", 100, 100);
 		g.drawString("YOUR SCORE: "+manager.overallScore, 100, 140);
+		g.drawString("This game was made by Karl Aannestad! Thank you for playing", 100, 200);
 		clicky.draw(g);
 	}
 	
@@ -208,7 +209,7 @@ void drawMenuState(Graphics g) {
 		}
 		
 		if(currentState==END_STATE&&clicky.checkClicked(clickedX, clickedY)) {
-			player=new Player(500,500,20,20);
+			player=new Player(500,500,30,30);
 			 manager=new ObbjectManager(player);
 			 currentState=0;
 			
@@ -221,8 +222,8 @@ void drawMenuState(Graphics g) {
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		player.x=e.getX()-6;
-		player.y=e.getY()-30;
+		player.x=e.getX()-player.radius-4;
+		player.y=e.getY()-player.radius-27;
 	}
 
 	@Override
@@ -240,15 +241,15 @@ void drawMenuState(Graphics g) {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		player.x=e.getX()-6;
-		player.y=e.getY()-30;
+		player.x=e.getX()-player.radius-4;
+		player.y=e.getY()-player.radius-27;
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		player.x=e.getX()-6;
-		player.y=e.getY()-30;
+		player.x=e.getX()-player.radius-2;
+		player.y=e.getY()-player.radius-27;
 	}
 	
 	public static void pause(int milli) {
