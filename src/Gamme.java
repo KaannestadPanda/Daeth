@@ -23,6 +23,7 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	static Player player=new Player(500,500,30,30);
 	
 	public static BufferedImage diabloImg;
+	Song backgMusic=new Song("epicMusic.wav");
 	
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -53,6 +54,8 @@ public class Gamme extends JPanel implements ActionListener, KeyListener,MouseMo
 	}
 	
 	void startGame() {
+		backgMusic.stop();
+		backgMusic.play();
 		
 		manager.addEnemy(new Enemy(20,20,10,10,1));
 		manager.addEnemy(new Enemy(400,200,10,10,2));
@@ -101,6 +104,7 @@ void updateMenuState() {
 		}
 		
 		pause(4000);
+	
 		
 	}
 	
