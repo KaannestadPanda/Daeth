@@ -89,6 +89,9 @@ public class ObbjectManager implements ActionListener {
 	}
 
 	void draw(Graphics g) {
+		
+		g.setColor(silver);
+		g.fillRect(0, 0, RunnGame.width, RunnGame.height);
 	
 		if(enemiesFrozen) {
 			
